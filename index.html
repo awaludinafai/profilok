@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profil — Awaludin Fadilah</title>
+  <meta name="description" content="Profil pribadi Awaludin Fadilah — Mahasiswa Sistem Informasi. Portofolio, tentang saya, proyek, dan kontak." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ====== Base & Variables ====== */
+    :root{
+      --bg: #07121a;
+      --surface: #0b1320;
+      --muted: #94a3b8;
+      --accent: #7cdbb6;
+      --accent-2: #59c9a6;
+      --text: #e6eef6;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --container: 1100px;
+      --transition: 320ms cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#06111a 0%, #07121a 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      padding-bottom:80px;
+    }
+    .container{ width:100%; max-width:var(--container); margin:0 auto; padding:0 20px; }
+
+    /* ====== Header ====== */
+    .site-header{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(9,12,18,0.6), rgba(9,12,18,0.28));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .header-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0; }
+    .brand{ font-weight:700; color:var(--text); text-decoration:none; letter-spacing:0.2px; }
+    .nav{ display:flex; gap:14px; align-items:center; }
+    .nav-link{ color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px; transition:color var(--transition), background var(--transition); font-weight:600; position:relative; }
+    .nav-link::after{ content:""; position:absolute; left:10px; right:10px; bottom:4px; height:2px; background:transparent; border-radius:2px; transition: background 180ms ease; }
+    .nav-link:hover{ color:var(--text); background:var(--glass) }
+    .nav-link:hover::after{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); opacity:0.9; }
+
+    .nav-toggle{ display:none; background:transparent; border:0; padding:8px; cursor:pointer; color:var(--text); }
+    .hamburger{ display:block; width:22px; height:2px; background:var(--text); position:relative; border-radius:2px; }
+    .hamburger::before, .hamburger::after{ content:""; position:absolute; left:0; width:22px; height:2px; background:var(--text); border-radius:2px; }
+    .hamburger::before{ top:-7px } .hamburger::after{ top:7px }
+
+    /* ====== Sections ====== */
+    .section{ padding:72px 0; position:relative; }
+    .section-head{ text-align:center; margin-bottom:28px }
+    .section-head h2{ margin:0; font-size:1.6rem; letter-spacing:0.2px }
+    .section-sub{ color:var(--muted); margin-top:8px }
+
+    /* ====== Hero ====== */
+    .hero-grid{ display:grid; grid-template-columns: 1fr 380px; align-items:center; gap:28px; padding-top:20px; }
+    .title{ font-size:2.1rem; margin:0 }
+    .accent{ color:var(--accent) }
+    .lead{ color:var(--muted); margin:12px 0 18px; max-width:50ch; min-height:44px; }
+
+    .typing{ display:inline-block; border-right:2px solid rgba(230,238,246,0.4); padding-right:6px; white-space:nowrap; overflow:hidden; vertical-align:bottom; }
+
+    .hero-cta{ display:flex; gap:12px; flex-wrap:wrap }
+    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; background:transparent; color:var(--text); text-decoration:none; border:1px solid rgba(255,255,255,0.06); transition:all var(--transition); font-weight:600; position:relative; overflow:hidden; }
+    .btn:focus{ outline:2px solid rgba(124,219,182,0.18) }
+    .btn:hover{ transform:translateY(-4px) }
+    .btn-primary{ background: linear-gradient(90deg, var(--accent), var(--accent-2)); color:#062224; border:0; }
+
+    .ripple { position:absolute; border-radius:50%; transform:scale(0); opacity:0.6; background:rgba(255,255,255,0.3); pointer-events:none; }
+
+    .socials{ display:flex; gap:10px; margin-top:14px }
+    .social{ display:inline-flex; gap:8px; align-items:center; color:var(--muted); text-decoration:none; padding:8px; border-radius:8px; transition: transform 260ms ease, color 260ms ease; }
+    .social svg{ display:block }
+    .social:hover{ color:var(--text); transform:translateY(-4px) }
+
+    .card-visual{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:14px; padding:18px; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.03); transition: transform 400ms cubic-bezier(.2,.9,.3,1); will-change:transform; }
+    .card-thumb{ width:100%; height:140px; border-radius:10px; background: linear-gradient(135deg, #0a2540, #092b23); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 18px rgba(2,6,23,0.6); margin-bottom:12px; }
+    .card-info h3{ margin:0 0 6px } .card-info p{ margin:0; color:var(--muted) }
+
+    /* ====== About ====== */
+    .about-grid{ display:grid; grid-template-columns: 1fr 320px; gap:22px; align-items:start }
+    .about-card, .contact-form, .contact-info { background:var(--surface); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); }
+    .about-list ul{ list-style:none; padding:0; margin:0; color:var(--muted) }
+    .about-list li{ padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.02) }
+
+    .skills{ display:flex; flex-direction:column; gap:10px; margin-top:12px }
+    .skill{ display:flex; align-items:center; gap:10px; }
+    .skill .name{ width:120px; color:var(--muted); font-size:14px }
+    .skill .bar{ flex:1; height:10px; background:rgba(255,255,255,0.03); border-radius:999px; overflow:hidden; }
+    .skill .bar > i{ display:block; height:100%; width:0%; background: linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:999px; transition: width 900ms cubic-bezier(.2,.9,.3,1); }
+
+    /* ====== Projects ====== */
+    .projects-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+    .project-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px; overflow:hidden;
+      transition: transform var(--transition), box-shadow var(--transition), opacity 420ms ease;
+      border: 1px solid rgba(255,255,255,0.03); will-change: transform, opacity;
+      cursor:pointer;
+    }
+    .project-card:hover{ transform: translateY(-12px) rotateX(3deg); box-shadow: 0 18px 40px rgba(2,6,23,0.6) }
+
+    .thumb{ height:160px; background: linear-gradient(135deg,#123, #045); overflow:hidden; position:relative; }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; transform:scale(1.06); opacity:0; transition: transform 700ms cubic-bezier(.2,.9,.3,1), opacity 600ms ease; will-change: transform, opacity; }
+    /* when card revealed, image fades in */
+    .project-card.in-view .thumb img{ opacity:1; transform:scale(1); }
+
+    .project-body{ padding:14px }
+    .project-meta{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap }
+    .tag{ background:rgba(255,255,255,0.03); color:var(--muted); padding:6px 8px; border-radius:999px; font-size:13px }
+
+    /* ====== Contact ====== */
+    .contact-grid{ display:grid; grid-template-columns: 1fr 320px; gap:22px; align-items:start }
+    .contact-form label{ display:block; font-weight:700; margin-top:12px; margin-bottom:6px; font-size:13px; color:var(--muted) }
+    .contact-form input, .contact-form textarea{
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--text); outline:none; transition: box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .contact-form input:focus, .contact-form textarea:focus{ box-shadow: 0 6px 24px rgba(0,0,0,0.45); border-color: rgba(124,219,182,0.12) }
+    .form-actions{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap }
+
+    .social-vertical{ display:flex; flex-direction:column; gap:10px; margin-top:16px }
+    .social{ display:inline-flex; gap:10px; align-items:center; color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px }
+
+    /* ====== Footer ====== */
+    .site-footer{ margin-top:42px; padding:18px 0; color:var(--muted); text-align:center }
+
+    /* ====== Reveal animation and stagger ====== */
+    .reveal{ opacity:0; transform: translateY(16px); transition: opacity 700ms cubic-bezier(.2,.9,.3,1), transform 700ms cubic-bezier(.2,.9,.3,1); will-change: transform, opacity; }
+    .reveal.in-view{ opacity:1; transform:none; }
+    .stagger > *{ opacity:0; transform: translateY(12px); transition: opacity 600ms ease, transform 600ms ease; }
+    .stagger.in-view > *{ opacity:1; transform:none; }
+    .stagger.in-view > *:nth-child(1){ transition-delay:120ms }
+    .stagger.in-view > *:nth-child(2){ transition-delay:220ms }
+    .stagger.in-view > *:nth-child(3){ transition-delay:320ms }
+    .stagger.in-view > *:nth-child(4){ transition-delay:420ms }
+
+    /* ====== Typing cursor blink ====== */
+    @keyframes blinkCaret { 50% { border-color: transparent; } }
+    .typing{ animation: blinkCaret 1s steps(1) infinite; }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .about-grid, .contact-grid{ grid-template-columns: 1fr; }
+      .projects-grid{ grid-template-columns: repeat(2,1fr) }
+      .nav-toggle{ display:block }
+      .nav{ position:fixed; top:64px; right:16px; background:linear-gradient(180deg, rgba(9,12,18,0.98), rgba(9,12,18,0.98)); padding:12px; border-radius:10px; box-shadow: 0 12px 40px rgba(2,6,23,0.6); display:flex; flex-direction:column; gap:8px; transform:translateY(-8px); opacity:0; pointer-events:none; transition:all 260ms ease }
+      .nav.open{ opacity:1; pointer-events:auto }
+      .nav-link{ padding:10px 14px }
+    }
+    @media (max-width: 640px){
+      .projects-grid{ grid-template-columns: 1fr }
+      .title{ font-size:1.6rem }
+      .lead{ max-width:100% }
+      .hero-visual{ display:none }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">Awaludin Fadilah</a>
+
+      <nav class="nav" id="nav" aria-label="Main Navigation">
+        <a href="#home" class="nav-link">Beranda</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#projects" class="nav-link">Proyek</a>
+        <a href="#contact" class="nav-link">Kontak</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-controls="nav" aria-expanded="false" aria-label="Buka menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero section reveal" data-delay="0">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1 class="title">Halo, saya <span class="accent">Awaludin Fadilah</span></h1>
+          <p class="lead">
+            <span id="typed" class="typing" data-text="Mahasiswa Sistem Informasi • Pengembangan Web • UI/UX"></span>
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects" id="viewProjects">Lihat Proyek</a>
+            <a class="btn" href="#contact" id="contactBtn">Hubungi Saya</a>
+          </div>
+
+          <div class="socials" aria-hidden="false">
+            <a class="social" href="#" aria-label="LinkedIn (placeholder)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M7.5 10.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="7.5" cy="7.5" r="1.25" fill="currentColor"/>
+                <path d="M11.5 17V12.5c0-1.1.9-2 2-2s2 .9 2 2V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <a class="social" href="#" aria-label="GitHub (placeholder)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2C7 2 4 5 4 9.5c0 3 2 5.5 4.7 6.4.35.06.48-.15.48-.34 0-.17-.01-.63-.01-1.23-1.9.35-2.3-.9-2.45-1.73-.08-.36-.43-1.73-.73-2.1-.25-.31-.64-.67-.01-.68.6-.01 1.03.55 1.17.77.69 1.16 1.8.83 2.24.63.07-.5.27-.84.49-1.03-1.7-.2-3.5-.86-3.5-3.83 0-.85.3-1.54.78-2.08-.08-.2-.34-1.02.07-2.12 0 0 .63-.2 2.07.77a7 7 0 0 1 3.77 0c1.44-.98 2.07-.77 2.07-.77.41 1.1.15 1.92.07 2.12.48.54.78 1.23.78 2.08 0 2.98-1.8 3.63-3.51 3.83.28.24.53.7.53 1.41 0 1.02-.01 1.84-.01 2.09 0 .19.13.41.49.34C18 15 20 12.5 20 9.5 20 5 17 2 12 2z" stroke="currentColor" stroke-width="0.2" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="card-visual" id="cardVisual">
+            <div class="card-thumb"></div>
+            <div class="card-info">
+              <h3>Proyek Terbaru</h3>
+              <p>Contoh proyek tugas kuliah dan portofolio pribadi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section about reveal" data-delay="120">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tentang Saya</h2>
+          <p class="section-sub">Sedikit tentang latar belakang dan keahlian saya.</p>
+        </div>
+
+        <div class="about-grid stagger" data-stagger>
+          <div class="about-card">
+            <h3>Siapa saya</h3>
+            <p>Saya adalah mahasiswa Sistem Informasi yang fokus mempelajari pengembangan web, desain antarmuka, dan pengalaman pengguna. Aktif mengerjakan tugas dan proyek yang melibatkan HTML, CSS, dan JavaScript.</p>
+
+            <div class="skills" aria-hidden="false" id="skills">
+              <div class="skill">
+                <div class="name">HTML</div>
+                <div class="bar"><i data-target="95"></i></div>
+              </div>
+              <div class="skill">
+                <div class="name">CSS</div>
+                <div class="bar"><i data-target="88"></i></div>
+              </div>
+              <div class="skill">
+                <div class="name">JavaScript</div>
+                <div class="bar"><i data-target="75"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-list">
+            <ul>
+              <li><strong>Keahlian:</strong> HTML, CSS, JavaScript, Responsive Design</li>
+              <li><strong>Tools:</strong> Git, Figma, VSCode</li>
+              <li><strong>Minat:</strong> UI/UX, Performance, Accessibility</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects (with images) -->
+    <section id="projects" class="section projects reveal" data-delay="220">
+      <div class="container">
+        <div class="section-head">
+          <h2>Proyek</h2>
+          <p class="section-sub">Beberapa proyek pilihan yang menunjukkan pendekatan desain dan teknis saya.</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Project 1 -->
+          <article class="project-card" data-delay="0">
+            <div class="thumb" role="img" aria-label="Thumbnail Proyek 1">
+              <img
+                src="https://picsum.photos/seed/project1/800/450"
+                srcset="https://picsum.photos/seed/project1/400/225 400w, https://picsum.photos/seed/project1/800/450 800w"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                alt="Tampilan landing page minimalis - Proyek A"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <h3>Proyek A</h3>
+              <p>Landing page minimalis untuk tugas mata kuliah. Fokus pada tipografi dan performa.</p>
+              <div class="project-meta"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card" data-delay="80">
+            <div class="thumb" role="img" aria-label="Thumbnail Proyek 2">
+              <img
+                src="https://picsum.photos/seed/project2/800/450"
+                srcset="https://picsum.photos/seed/project2/400/225 400w, https://picsum.photos/seed/project2/800/450 800w"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                alt="Antarmuka aplikasi interaktif - Proyek B"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <h3>Proyek B</h3>
+              <p>Aplikasi web interaktif dengan animasi halus saat scroll.</p>
+              <div class="project-meta"><span class="tag">JavaScript</span><span class="tag">UI/UX</span></div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card" data-delay="160">
+            <div class="thumb" role="img" aria-label="Thumbnail Proyek 3">
+              <img
+                src="https://picsum.photos/seed/project3/800/450"
+                srcset="https://picsum.photos/seed/project3/400/225 400w, https://picsum.photos/seed/project3/800/450 800w"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                alt="Dashboard sederhana untuk proyek kelompok - Proyek C"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <h3>Proyek C</h3>
+              <p>Dashboard sederhana untuk proyek kelompok dengan fokus pada aksesibilitas.</p>
+              <div class="project-meta"><span class="tag">Accessibility</span><span class="tag">Performance</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact reveal" data-delay="320">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kontak</h2>
+          <p class="section-sub">Ingin bekerja sama atau berdiskusi? Kirim pesan singkat.</p>
+        </div>
+
+        <div class="contact-grid">
+          <form class="contact-form" action="mailto:email@example.com" method="post" enctype="text/plain" onsubmit="alert('Demo: formulir ini menggunakan mailto. Ganti action untuk produksi.');">
+            <label for="name">Nama</label>
+            <input id="name" name="name" type="text" required placeholder="Nama Anda">
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="nama@contoh.com">
+
+            <label for="message">Pesan</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tulis pesan..." required></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Kirim</button>
+              <a class="btn btn-ghost" href="mailto:email@example.com">Atau email langsung</a>
+            </div>
+          </form>
+
+          <aside class="contact-info" aria-label="Informasi kontak">
+            <h3>Informasi</h3>
+            <p>Email: <a href="mailto:email@example.com">email@example.com</a></p>
+            <p>Lokasi: Indonesia</p>
+            <div class="social-vertical">
+              <a class="social" href="#" aria-label="LinkedIn (placeholder)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.2"/><path d="M7.5 10.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7.5" cy="7.5" r="1.25" fill="currentColor"/><path d="M11.5 17V12.5c0-1.1.9-2 2-2s2 .9 2 2V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> LinkedIn</a>
+              <a class="social" href="#" aria-label="GitHub (placeholder)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 2 4 5 4 9.5c0 3 2 5.5 4.7 6.4.35.06.48-.15.48-.34 0-.17-.01-.63-.01-1.23-1.9.35-2.3-.9-2.45-1.73-.08-.36-.43-1.73-.73-2.1-.25-.31-.64-.67-.01-.68.6-.01 1.03.55 1.17.77.69 1.16 1.8.83 2.24.63.07-.5.27-.84.49-1.03-1.7-.2-3.5-.86-3.5-3.83 0-.85.3-1.54.78-2.08-.08-.2-.34-1.02.07-2.12 0 0 .63-.2 2.07.77a7 7 0 0 1 3.77 0c1.44-.98 2.07-.77 2.07-.77.41 1.1.15 1.92.07 2.12.48.54.78 1.23.78 2.08 0 2.98-1.8 3.63-3.51 3.83.28.24.53.7.53 1.41 0 1.02-.01 1.84-.01 2.09 0 .19.13.41.49.34C18 15 20 12.5 20 9.5 20 5 17 2 12 2z" stroke="currentColor" stroke-width="0.2" fill="currentColor"/></svg> GitHub</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Awaludin Fadilah. Semua hak dilindungi.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ============================
+    // Small JS to power animations
+    // ============================
+    document.addEventListener('DOMContentLoaded', () => {
+      // set year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // mobile nav toggle
+      const navToggle = document.getElementById('navToggle');
+      const nav = document.getElementById('nav');
+      navToggle && navToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      // close mobile nav on link click
+      document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+        if (nav.classList.contains('open')) { nav.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
+      }));
+
+      // Typing effect (lightweight)
+      (function typing() {
+        const el = document.getElementById('typed');
+        if (!el) return;
+        const txt = el.dataset.text || el.textContent || '';
+        let i = 0;
+        function step() {
+          el.textContent = txt.slice(0, i++);
+          if (i <= txt.length) {
+            setTimeout(step, 50 + Math.random() * 80);
+          } else {
+            setTimeout(() => { el.classList.remove('typing'); el.style.borderRight = 'none'; }, 800);
+          }
+        }
+        el.textContent = '';
+        el.classList.add('typing');
+        step();
+      })();
+
+      // IntersectionObserver for reveal + stagger + skill bar animation + staggered delays
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const d = parseInt(el.dataset.delay || 0, 10);
+          setTimeout(() => {
+            el.classList.add('in-view');
+            if (el.querySelector('[data-stagger]')) {
+              el.querySelector('[data-stagger]').classList.add('in-view');
+            }
+            if (el.id === 'about' || el.querySelector('#skills')) {
+              document.querySelectorAll('#skills .bar i').forEach(i => {
+                const target = parseInt(i.dataset.target || 0, 10);
+                setTimeout(() => { i.style.width = target + '%'; }, 160);
+              });
+            }
+            if (el.id === 'projects') {
+              document.querySelectorAll('#projectsGrid .project-card').forEach((card, idx) => {
+                const cd = parseInt(card.dataset.delay || 0, 10);
+                setTimeout(() => card.classList.add('in-view'), 80 + cd + idx * 80);
+              });
+            }
+          }, d);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      revealEls.forEach(e => io.observe(e));
+
+      // project card interactions (tilt/hover) + ensure image reveal on in-view
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', (ev) => {
+          const rect = card.getBoundingClientRect();
+          const x = (ev.clientX - rect.left) / rect.width - 0.5;
+          const y = (ev.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `translateY(-8px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg)`;
+          const thumbImg = card.querySelector('.thumb img');
+          if (thumbImg) thumbImg.style.transform = `scale(1.03) translate3d(${(x * 8).toFixed(1)}px, ${(y * 6).toFixed(1)}px, 0)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          const thumbImg = card.querySelector('.thumb img');
+          if (thumbImg) thumbImg.style.transform = '';
+        });
+        card.addEventListener('click', () => {
+          card.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-4px)' }, { transform: 'translateY(0)' }], { duration: 280 });
+        });
+      });
+
+      // hero visual parallax (desktop)
+      const hero = document.querySelector('.hero');
+      const cardVisual = document.getElementById('cardVisual');
+      if (hero && cardVisual && window.matchMedia('(min-width:980px)').matches) {
+        hero.addEventListener('mousemove', (e) => {
+          const rect = hero.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          cardVisual.style.transform = `translate3d(${x * 14}px, ${y * 8}px, 0) rotate(${x * 1.6}deg)`;
+        });
+        hero.addEventListener('mouseleave', () => { cardVisual.style.transform = ''; });
+      }
+
+      // Button ripple effect
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const r = document.createElement('span');
+          r.className = 'ripple';
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height) * 1.2;
+          r.style.width = r.style.height = size + 'px';
+          r.style.left = (e.clientX - rect.left - size/2) + 'px';
+          r.style.top = (e.clientY - rect.top - size/2) + 'px';
+          this.appendChild(r);
+          r.animate([{ transform: 'scale(0)', opacity: 0.6 }, { transform: 'scale(1)', opacity: 0 }], { duration: 600, easing: 'cubic-bezier(.2,.9,.3,1)' });
+          setTimeout(() => r.remove(), 650);
+        });
+      });
+
+      // small safety: when project cards become .in-view, ensure their images are visible (in-case)
+      const projObserver = new MutationObserver((mutations) => {
+        mutations.forEach(m => {
+          if (m.type === 'attributes' && m.attributeName === 'class') {
+            const target = m.target;
+            if (target.classList && target.classList.contains('in-view')) {
+              const img = target.querySelector('.thumb img');
+              if (img) { img.style.opacity = '1'; img.style.transform = 'scale(1)'; }
+            }
+          }
+        });
+      });
+      document.querySelectorAll('.project-card').forEach(c => projObserver.observe(c, { attributes: true }));
+
+    });
+  </script>
+</body>
+</html>
